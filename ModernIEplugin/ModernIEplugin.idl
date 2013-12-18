@@ -1,0 +1,34 @@
+// ModernIEplugin.idl : IDL source for ModernIEplugin
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (ModernIEplugin.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(77D1DAFF-891B-481D-93A4-4DC9DD7EE8BB),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IModernIEButton : IDispatch{
+};
+[
+	uuid(EA47C639-CA90-4DCF-9860-74B5CB36C469),
+	version(1.0),
+]
+library ModernIEpluginLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(73234FA1-5970-48C3-AE91-41347EFB248C)		
+	]
+	coclass ModernIEButton
+	{
+		[default] interface IModernIEButton;
+	};
+};
+
