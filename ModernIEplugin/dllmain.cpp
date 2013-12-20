@@ -5,6 +5,7 @@
 #include "ModernIEplugin_i.h"
 #include "dllmain.h"
 #include "xdlldata.h"
+#include "Utils.h"
 
 CModernIEpluginModule _AtlModule;
 
@@ -15,6 +16,6 @@ extern "C" BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID lpRes
 	if (!PrxDllMain(hInstance, dwReason, lpReserved))
 		return FALSE;
 #endif
-	hInstance;
+	CUtils::hInstance = hInstance;
 	return _AtlModule.DllMain(dwReason, lpReserved); 
 }

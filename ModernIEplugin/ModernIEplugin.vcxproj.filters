@@ -17,6 +17,12 @@
       <UniqueIdentifier>{47a35e0b-3960-4b7a-ac27-c06d1c806110}</UniqueIdentifier>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
+    <Filter Include="Images">
+      <UniqueIdentifier>{f0d73c73-7ba5-4488-94b8-cb90ab199e5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{913de8c2-0f6e-4ab7-abde-64ab30aef4d5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -35,6 +41,9 @@
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="ModernIEButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -60,14 +69,14 @@
     <ClInclude Include="ModernIEButton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ModernIEplugin.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ModernIEplugin.rgs">
@@ -80,10 +89,18 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="RegisterPlugin.reg" />
+    <None Include="Scripts\alert.js">
+      <Filter>Scripts</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="ModernIEplugin.idl">
       <Filter>Source Files</Filter>
     </Midl>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Images\ButtonIcon.ico">
+      <Filter>Images</Filter>
+    </Image>
   </ItemGroup>
 </Project>
