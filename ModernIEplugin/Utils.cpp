@@ -40,16 +40,38 @@ BSTR CUtils::ReadFileToBSTR(LPCWSTR lpFileName)
 		OPEN_EXISTING,         
 		FILE_ATTRIBUTE_NORMAL,
 		NULL);
+	ATLENSURE(hFile != INVALID_HANDLE_VALUE);
 
-	ATLVERIFY(::GetFileSizeEx(hFile, &file_size));
-	ATLVERIFY(hFile != INVALID_HANDLE_VALUE);
-
+	ATLENSURE(::GetFileSizeEx(hFile, &file_size));
+	
 	SIZE_T buffer_size = (SIZE_T)file_size.QuadPart;
 	VOID* read_buffer = ::LocalAlloc(LMEM_ZEROINIT, buffer_size);
-	ATLVERIFY(::ReadFile(hFile, read_buffer, buffer_size, &bytes_read, NULL));
-	ATLVERIFY(::CloseHandle(hFile));
+	ATLENSURE(::ReadFile(hFile, read_buffer, buffer_size, &bytes_read, NULL));
+	ATLENSURE(::CloseHandle(hFile));
 
 	CComBSTR result = CComBSTR((LPCSTR)read_buffer);
 
 	return result;
 }
+
+//void CUtils::InjectCSS(IHTMLDocument2* pDocument)
+//{
+//	CComPtr<IHTMLElement> body;
+//	pDocument->get_body(&body);
+//
+//	CComPtr<IHTMLScriptElement> scriptObject;
+//	pDocument->createElement(L"script", (IHTMLElement**)&scriptObject);
+//
+//	scriptObject->put_type(L"text/javascript");
+//	scriptObject->put_text(L"\nfunction hidediv(){document.getElementById('myOwnUniqueId12345').style.visibility = 'hidden';}\n\n");
+//
+//	CComPtr<IHTMLDOMNode> domnodebody;
+//	body->QueryInterface(IID_IHTMLDOMNode, (void**)&domnodebody);
+//
+//	CComPtr<IHTMLDOMNode> domnodescript;
+//	scriptObject->QueryInterface(IID_IHTMLDOMNode, (void**)&domnodescript);
+//
+//
+//	CComPtr<IHTMLDOMNode> pRefNode = NULL;
+//	domnodebody->appendChild(domnodescript, &pRefNode);
+//}

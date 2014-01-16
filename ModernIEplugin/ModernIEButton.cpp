@@ -30,7 +30,7 @@ STDMETHODIMP CModernIEButton::Exec(const GUID *pguidCmdGroup, DWORD nCmdID,
 {
 	CComPtr<IDispatch> spDoc;
 	HRESULT hr = m_spWebBrowser->get_Document(&spDoc);
-	ATLASSERT(hr == S_OK);
+	ATLENSURE(hr == S_OK);
 
 	if (SUCCEEDED(hr))
 	{
@@ -38,20 +38,14 @@ STDMETHODIMP CModernIEButton::Exec(const GUID *pguidCmdGroup, DWORD nCmdID,
 
 		if (NULL != spHTMLDoc)
 		{
-			CComBSTR html;
-			CComPtr<IHTMLElement> document;
+			CComPtr<IHTMLElement> docElement;
 			CComPtr<IHTMLWindow2> window;
 
-			spHTMLDoc->get_documentElement(&document);
+			spHTMLDoc->get_documentElement(&docElement);
 			((CComQIPtr<IHTMLDocument2>)spHTMLDoc)->get_parentWindow(&window);
 			
-			document->get_innerHTML(&html);
-			
-
-			ATLTRACE(CUtils::GetScriptsPath() + CAtlString("alert.js"));
-
 			CAtlString script_path = CUtils::GetScriptsPath() + CAtlString("alert.js");
-
+			ATLTRACE(script_path);
 			BSTR script = CUtils::ReadFileToBSTR(script_path.GetString());
 
 			CComVariant result;
@@ -60,7 +54,18 @@ STDMETHODIMP CModernIEButton::Exec(const GUID *pguidCmdGroup, DWORD nCmdID,
 				CComBSTR(L"JavaScript"), 
 				&result);
 
-			ATLASSERT(hr == S_OK);
+			ATLENSURE(hr == S_OK);
+
+			CAtlString css_path = CUtils::GetScriptsPath() + CAtlString("test.css");
+			ATLTRACE(css_path);
+
+			CComPtr<IHTMLStyleSheet> style_sheet;
+			hr = ((CComQIPtr<IHTMLDocument2>)spHTMLDoc)->createStyleSheet(CComBSTR(""), 0, &style_sheet);
+			ATLENSURE(hr == S_OK);
+
+			BSTR css = CUtils::ReadFileToBSTR(css_path.GetString());
+			hr = style_sheet->put_cssText(css);
+			ATLENSURE(hr == S_OK);
 		}
 	}
 
