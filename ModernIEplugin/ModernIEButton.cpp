@@ -34,39 +34,40 @@ STDMETHODIMP CModernIEButton::Exec(const GUID *pguidCmdGroup, DWORD nCmdID,
 
 	if (SUCCEEDED(hr))
 	{
-		CComQIPtr<IHTMLDocument3> spHTMLDoc = spDoc;
+		CComQIPtr<IHTMLDocument3> spHTMLDoc3 = spDoc;
+		CComQIPtr<IHTMLDocument2> spHTMLDoc2 = spDoc;
+		CComPtr<IHTMLElement> docElement;
+		CComPtr<IHTMLWindow2> window;
 
-		if (NULL != spHTMLDoc)
-		{
-			CComPtr<IHTMLElement> docElement;
-			CComPtr<IHTMLWindow2> window;
+		spHTMLDoc3->get_documentElement(&docElement);
+		spHTMLDoc2->get_parentWindow(&window);
 
-			spHTMLDoc->get_documentElement(&docElement);
-			((CComQIPtr<IHTMLDocument2>)spHTMLDoc)->get_parentWindow(&window);
-			
-			CAtlString script_path = CUtils::GetScriptsPath() + CAtlString("alert.js");
-			ATLTRACE(script_path);
-			BSTR script = CUtils::ReadFileToBSTR(script_path.GetString());
+		//CComPtr<IHTMLStyleSheet> style_sheet;
+		//hr = spHTMLDoc2->createStyleSheet(CComBSTR(""), 0, &style_sheet);
+		//ATLENSURE(hr == S_OK);
 
-			CComVariant result;
-			hr = window->execScript(
-				script, 
-				CComBSTR(L"JavaScript"), 
-				&result);
+		//BSTR css = CUtils::ReadFileToBSTR(css_path.GetString());
+		//hr = style_sheet->put_cssText(css);
+		//ATLENSURE(hr == S_OK);
 
-			ATLENSURE(hr == S_OK);
 
-			CAtlString css_path = CUtils::GetScriptsPath() + CAtlString("test.css");
-			ATLTRACE(css_path);
+		CComPtr<IHTMLElement> body;
+		CComPtr<IHTMLDOMNode> body_node;
+		spHTMLDoc2->get_body(&body);
+		body->QueryInterface(IID_IHTMLDOMNode, (void**)&body_node);
 
-			CComPtr<IHTMLStyleSheet> style_sheet;
-			hr = ((CComQIPtr<IHTMLDocument2>)spHTMLDoc)->createStyleSheet(CComBSTR(""), 0, &style_sheet);
-			ATLENSURE(hr == S_OK);
+		CAtlString start_script_path = CUtils::GetScriptsPath() + CAtlString("start.js");
+		BSTR start_script = CUtils::ReadFileToBSTR(start_script_path);
 
-			BSTR css = CUtils::ReadFileToBSTR(css_path.GetString());
-			hr = style_sheet->put_cssText(css);
-			ATLENSURE(hr == S_OK);
-		}
+		CComVariant result;
+		hr = window->execScript(start_script, CComBSTR(L"JavaScript"), &result);
+		ATLENSURE(hr == S_OK);
+
+		//CAtlString crawler_script_path = CUtils::GetScriptsPath() + CAtlString("crawler.js");
+		//CUtils::InjectScript(spHTMLDoc2, body_node, CComBSTR(crawler_script_path));
+
+		//CAtlString modern_css_path = CUtils::GetCSSsPath() + CAtlString("modern.css");
+		//CUtils::InjectLink(spHTMLDoc2, body_node, _T("stylesheet"), _T("text/css"), CComBSTR(modern_css_path));
 	}
 
 	return S_OK;

@@ -77,7 +77,8 @@
       <RegisterOutput>true</RegisterOutput>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y /d $(ProjectDir)Scripts\*.* $(OutDir)Scripts\</Command>
+      <Command>xcopy /y /d $(ProjectDir)Scripts\*.* $(OutDir)Scripts\
+xcopy /y /d $(ProjectDir)CSS\*.* $(OutDir)CSS\</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -114,7 +115,8 @@
       <RegisterOutput>true</RegisterOutput>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y /d $(ProjectDir)Scripts\*.* $(OutDir)Scripts\</Command>
+      <Command>xcopy /y /d $(ProjectDir)Scripts\*.* $(OutDir)Scripts\
+xcopy /y /d $(ProjectDir)CSS\*.* $(OutDir)CSS\</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -164,13 +166,14 @@
     <ResourceCompile Include="ModernIEplugin.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="CSS\modern.css" />
+    <None Include="CSS\test.css" />
     <None Include="ModernIEButton.rgs" />
     <None Include="ModernIEplugin.def" />
     <None Include="ModernIEplugin.rgs" />
     <None Include="RegisterPlugin.reg" />
-    <None Include="Scripts\alert.js">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
+    <None Include="Scripts\crawler.js" />
+    <None Include="Scripts\start.js" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="ModernIEplugin.idl" />

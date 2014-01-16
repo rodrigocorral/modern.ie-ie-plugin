@@ -11,7 +11,10 @@ public:
 
 	static HINSTANCE hInstance;
 	static CString GetScriptsPath();
-	static BSTR ReadFileToBSTR(LPCWSTR lpFileName);
+	static CString GetCSSsPath();
+	static BSTR ReadFileToBSTR(LPCWSTR fileName);
+	static void InjectScript(IHTMLDocument2* document, IHTMLDOMNode* parentNode, BSTR src);
+	static void InjectLink(IHTMLDocument2* document, IHTMLDOMNode* parentNode, BSTR rel, BSTR type, BSTR href);
 
 private:
 	static CString GetPluginPath();

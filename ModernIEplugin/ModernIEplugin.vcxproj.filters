@@ -23,6 +23,12 @@
     <Filter Include="Scripts">
       <UniqueIdentifier>{913de8c2-0f6e-4ab7-abde-64ab30aef4d5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Styles">
+      <UniqueIdentifier>{e6360bcc-83c4-4319-ae12-b310be425e29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CSS">
+      <UniqueIdentifier>{07fed6c0-6690-489a-bcf4-1221dc5f3674}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -89,7 +95,16 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="RegisterPlugin.reg" />
-    <None Include="Scripts\alert.js">
+    <None Include="Scripts\crawler.js">
+      <Filter>Scripts</Filter>
+    </None>
+    <None Include="CSS\modern.css">
+      <Filter>CSS</Filter>
+    </None>
+    <None Include="CSS\test.css">
+      <Filter>CSS</Filter>
+    </None>
+    <None Include="Scripts\start.js">
       <Filter>Scripts</Filter>
     </None>
   </ItemGroup>

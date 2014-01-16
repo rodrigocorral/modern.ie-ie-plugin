@@ -11,12 +11,17 @@ CUtils::~CUtils()
 {
 }
 
+HINSTANCE CUtils::hInstance;
+
 CString CUtils::GetScriptsPath()
 {
 	return GetPluginPath() + CAtlString("\\Scripts\\");
 }
 
-HINSTANCE CUtils::hInstance;
+CString CUtils::GetCSSsPath()
+{
+	return GetPluginPath() + CAtlString("\\CSS\\");
+}
 
 CAtlString CUtils::GetPluginPath()
 {
@@ -28,12 +33,12 @@ CAtlString CUtils::GetPluginPath()
 	return strAppPath;
 }
 
-BSTR CUtils::ReadFileToBSTR(LPCWSTR lpFileName)
+BSTR CUtils::ReadFileToBSTR(LPCWSTR fileName)
 {
 	LARGE_INTEGER file_size;
 	DWORD bytes_read;
 
-	HANDLE hFile = ::CreateFile(lpFileName,
+	HANDLE hFile = ::CreateFile(fileName,
 		GENERIC_READ,          
 		FILE_SHARE_READ,       
 		NULL,                  
@@ -54,24 +59,59 @@ BSTR CUtils::ReadFileToBSTR(LPCWSTR lpFileName)
 	return result;
 }
 
-//void CUtils::InjectCSS(IHTMLDocument2* pDocument)
-//{
-//	CComPtr<IHTMLElement> body;
-//	pDocument->get_body(&body);
-//
-//	CComPtr<IHTMLScriptElement> scriptObject;
-//	pDocument->createElement(L"script", (IHTMLElement**)&scriptObject);
-//
-//	scriptObject->put_type(L"text/javascript");
-//	scriptObject->put_text(L"\nfunction hidediv(){document.getElementById('myOwnUniqueId12345').style.visibility = 'hidden';}\n\n");
-//
-//	CComPtr<IHTMLDOMNode> domnodebody;
-//	body->QueryInterface(IID_IHTMLDOMNode, (void**)&domnodebody);
-//
-//	CComPtr<IHTMLDOMNode> domnodescript;
-//	scriptObject->QueryInterface(IID_IHTMLDOMNode, (void**)&domnodescript);
-//
-//
-//	CComPtr<IHTMLDOMNode> pRefNode = NULL;
-//	domnodebody->appendChild(domnodescript, &pRefNode);
-//}
+void CUtils::InjectScript(IHTMLDocument2* document, IHTMLDOMNode* parentNode, BSTR src)
+{
+	HRESULT hr;
+
+	CComPtr<IHTMLElement> script_element_added;
+	hr = document->createElement(CComBSTR(_T("SCRIPT")), (IHTMLElement**)&script_element_added);
+	ATLENSURE(hr == S_OK);
+
+	CComPtr<IHTMLScriptElement> script_element;
+	hr = script_element_added->QueryInterface(IID_IHTMLScriptElement, (void**)&script_element);
+	ATLENSURE(hr == S_OK);
+
+	hr = script_element->put_type(CComBSTR(_T("text/javascript")));
+	ATLENSURE(hr == S_OK);
+
+	hr = script_element->put_src(src);
+	ATLENSURE(hr == S_OK);
+
+	CComPtr<IHTMLDOMNode> dom_node_script;
+	hr = script_element->QueryInterface(IID_IHTMLDOMNode, (void**)&dom_node_script);
+	ATLENSURE(hr == S_OK);
+
+	CComPtr<IHTMLDOMNode> pRefNode = NULL;
+	hr = parentNode->appendChild(dom_node_script, &pRefNode);
+	ATLENSURE(hr == S_OK);
+}
+
+void CUtils::InjectLink(IHTMLDocument2* document, IHTMLDOMNode* parentNode, BSTR rel, BSTR type, BSTR href)
+{
+	HRESULT hr;
+
+	CComPtr<IHTMLElement> link_element_added;
+	hr = document->createElement(CComBSTR(_T("LINK")), (IHTMLElement**)&link_element_added);
+	ATLENSURE(hr == S_OK);
+
+	CComPtr<IHTMLLinkElement> link_element;
+	hr = link_element_added->QueryInterface(IID_IHTMLLinkElement, (void**)&link_element);
+	ATLENSURE(hr == S_OK);
+
+	hr = link_element->put_rel(rel);
+	ATLENSURE(hr == S_OK);
+
+	hr = link_element->put_type(type);
+	ATLENSURE(hr == S_OK);
+
+	hr = link_element->put_href(href);
+	ATLENSURE(hr == S_OK);
+
+	CComPtr<IHTMLDOMNode> dom_node_link;
+	hr = link_element->QueryInterface(IID_IHTMLDOMNode, (void**)&dom_node_link);
+	ATLENSURE(hr == S_OK);
+
+	CComPtr<IHTMLDOMNode> pRefNode = NULL;
+	hr = parentNode->appendChild(dom_node_link, &pRefNode);
+	ATLENSURE(hr == S_OK);
+}
