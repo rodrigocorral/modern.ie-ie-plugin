@@ -1,0 +1,584 @@
+﻿.plugin-modern-ie html,
+.plugin-modern-ie body,
+.plugin-modern-ie div,
+.plugin-modern-ie span,
+.plugin-modern-ie object,
+.plugin-modern-ie iframe,
+.plugin-modern-ie h1,
+.plugin-modern-ie h2,
+.plugin-modern-ie h3,
+.plugin-modern-ie h4,
+.plugin-modern-ie h5,
+.plugin-modern-ie h6,
+.plugin-modern-ie p,
+.plugin-modern-ie blockquote,
+.plugin-modern-ie pre,
+.plugin-modern-ie abbr,
+.plugin-modern-ie address,
+.plugin-modern-ie cite,
+.plugin-modern-ie code,
+.plugin-modern-ie del, .plugin-modern-ie dfn, .plugin-modern-ie em, .plugin-modern-ie img, .plugin-modern-ie ins, .plugin-modern-ie kbd, .plugin-modern-ie q, .plugin-modern-ie samp,
+.plugin-modern-ie small, .plugin-modern-ie strong, .plugin-modern-ie sub, .plugin-modern-ie sup, .plugin-modern-ie var,
+.plugin-modern-ie b, .plugin-modern-ie i,
+.plugin-modern-ie dl, .plugin-modern-ie dt, .plugin-modern-ie dd, .plugin-modern-ie ol, .plugin-modern-ie ul, .plugin-modern-ie li,
+.plugin-modern-ie fieldset, .plugin-modern-ie form, .plugin-modern-ie label, .plugin-modern-ie legend,
+.plugin-modern-ie table, .plugin-modern-ie caption, .plugin-modern-ie tbody, .plugin-modern-ie tfoot, .plugin-modern-ie thead, .plugin-modern-ie tr, .plugin-modern-ie th, .plugin-modern-ie td,
+.plugin-modern-ie article, .plugin-modern-ie aside, .plugin-modern-ie canvas, .plugin-modern-ie details, .plugin-modern-ie figcaption, .plugin-modern-ie figure,
+.plugin-modern-ie footer, .plugin-modern-ie header, .plugin-modern-ie hgroup, .plugin-modern-ie menu, .plugin-modern-ie nav, .plugin-modern-ie section, .plugin-modern-ie summary,
+.plugin-modern-ie time, .plugin-modern-ie mark, .plugin-modern-ie audio, .plugin-modern-ie video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+    position: static;
+}
+
+.plugin-modern-ie body {
+    line-height:1;
+}
+
+.plugin-modern-ie article,.plugin-modern-ie aside,.plugin-modern-ie details,.plugin-modern-ie figcaption,.plugin-modern-ie figure,
+.plugin-modern-ie footer,.plugin-modern-ie header,.plugin-modern-ie hgroup,.plugin-modern-ie menu,.plugin-modern-ie nav,.plugin-modern-ie section {
+    display:block;
+}
+
+.plugin-modern-ie nav ul {
+    list-style:none;
+}
+
+.plugin-modern-ie blockquote, .plugin-modern-ie q {
+    quotes:none;
+}
+
+.plugin-modern-ie blockquote:before, .plugin-modern-ie blockquote:after,
+.plugin-modern-ie q:before, .plugin-modern-ie q:after {
+    content:'';
+    content:none;
+}
+
+.plugin-modern-ie a {
+    margin:0;
+    padding:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+/* change colours to suit your needs */
+.plugin-modern-ie ins {
+    background-color:#ff9;
+    color:#000;
+    text-decoration:none;
+}
+
+/* change colours to suit your needs */
+.plugin-modern-ie mark {
+    background-color:#ff9;
+    color:#000;
+    font-style:italic;
+    font-weight:bold;
+}
+
+.plugin-modern-ie del {
+    text-decoration: line-through;
+}
+
+.plugin-modern-ie abbr[title], .plugin-modern-ie dfn[title] {
+    border-bottom:1px dotted;
+    cursor:help;
+}
+
+.plugin-modern-ie table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+
+/* change border colour to suit your needs */
+.plugin-modern-ie hr {
+    display:block;
+    height:1px;
+    border:0;
+    border-top:1px solid #cccccc;
+    margin:1em 0;
+    padding:0;
+}
+
+.plugin-modern-ie input, .plugin-modern-ie select {
+    vertical-align:middle;
+}
+
+
+.plugin-modern-ie {
+    background-color: #fff;
+    font-family: 'Segoe UI', Helvetica, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+    height: 410px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000000;
+    transition: height 0.2s linear;
+}
+
+.plugin-modern-ie.plugin-modern-ie-minimize {
+    height: 45px;
+}
+
+.plugin-modern-ie ul{
+    text-decoration: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.plugin-modern-ie li{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style-type: none;
+}
+
+.plugin-modern-ie .clear {
+    clear: both;
+}
+
+.plugin-modern-ie .main-header {
+    height: 45px;
+    line-height: 45px;
+    background-color: #2e2e2e;
+    position: relative;
+}
+
+.plugin-modern-ie .header-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 45px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    cursor: pointer;
+}
+
+    .plugin-modern-ie .header-button.close {
+        left: initial;
+        display: block;
+        background-color: #1a1a1a;
+        background-image: url(chrome-extension://__MSG_@@extension_id__/images/close-icon.png);
+    }
+
+    .plugin-modern-ie .header-button.more {
+        right: 50px;
+        display: block;
+        left: initial;
+        background-image: url(chrome-extension://__MSG_@@extension_id__/images/more-icon.png);
+    }
+
+.plugin-modern-ie.plugin-modern-ie-minimize .header-button.more {
+    background-image: url(chrome-extension://__MSG_@@extension_id__/images/more-icon-max.png);
+}
+
+.plugin-modern-ie .header-title {
+    font-family: 'Segoe UI SemiLight';
+    color: #fff;
+    padding-left: 50px;
+    background-image: url(chrome-extension://__MSG_@@extension_id__/images/result-icon.png);
+    background-repeat: no-repeat;
+    background-position: 15px center;
+    margin: 0;
+    position: static;
+    padding: 0 0 0 50px;
+    width: auto;
+    letter-spacing: normal;
+    line-height: 45px;
+    height: 45px;
+}
+
+.plugin-modern-ie .button-section {
+    width: 170px;
+    height: 120px;
+    border-bottom: 2px solid #fff;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+    .plugin-modern-ie .button-section.coding-issue {
+        background-color: #41a5e0;
+        background-image: url(chrome-extension://__MSG_@@extension_id__/images/coding-issue-icon.png);
+    }
+
+    .plugin-modern-ie .button-section.screenshots {
+        background-color: #fac458;
+        background-image: url(chrome-extension://__MSG_@@extension_id__/images/screenshots-icon.png);
+    }
+
+    .plugin-modern-ie .button-section.code-not-supported {
+        background-color: #25b578;
+        background-image: url(chrome-extension://__MSG_@@extension_id__/images/code-not-supported-icon.png);
+    }
+
+.plugin-modern-ie .column.left {
+    position: absolute;
+    left: 0;
+    width: 170px;
+    display: none;
+}
+
+.plugin-modern-ie .column.right {
+    position: absolute;
+    right: 0;
+    width: 190px;
+    height: calc(100% - 45px);
+    display: none;
+}
+
+.plugin-modern-ie .column.right img{
+    padding:0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.plugin-modern-ie .column.right a {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: 190px auto;
+    background-image: url(chrome-extension://__MSG_@@extension_id__/images/banner-example.png);
+    background-repeat: no-repeat;
+    background-position: left top;
+    box-sizing: border-box;
+}
+
+.plugin-modern-ie .column.right a:hover{
+    border: 2px solid black;
+    background-position: -2px -2px;
+}
+
+.plugin-modern-ie .column.center {
+    /*margin-left: 170px;
+    margin-right: 190px;*/
+    height: 365px;
+    overflow-y: auto;
+}
+
+.plugin-modern-ie #modern-ie-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -27px;
+    margin-left: -27px;
+}
+
+.plugin-modern-ie .section-list {
+    padding: 0;
+    font-size: 16px;
+}
+
+.plugin-modern-ie .padding-list {
+    padding: 10px 20px 10px 58px;
+    display: block;
+}
+
+.plugin-modern-ie .section-item-description {
+    color: #2e2e2e;
+    background: #d9d9d9 url(chrome-extension://__MSG_@@extension_id__/images/section-icon.png) 20px center no-repeat;
+    margin: 0;
+    font-family: "Segoe UI Semibold","Segoe Semibold","Segoe WP Semibold","Tahoma","Verdana","Arial","sans-serif";
+    font-size: 15pt;
+}
+
+
+.plugin-modern-ie a.test-item-title, 
+.plugin-modern-ie a.test-item-title:link, 
+.plugin-modern-ie a.test-item-title:hover, 
+.plugin-modern-ie a.test-item-title:active {
+    text-decoration: none;
+    font-family: "Segoe UI Semilight";
+    font-size: 14px;
+    color: #404040;
+    background: 20px center no-repeat;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-bottom: 1px solid #dddddd;
+    position: relative;
+}
+
+    .plugin-modern-ie a.test-item-title.ok {
+        background-image: url(chrome-extension://__MSG_@@extension_id__/images/ok-icon.png);
+    }
+
+    .plugin-modern-ie a.test-item-title.warning {
+        background-image: url(chrome-extension://__MSG_@@extension_id__/images/warning-icon.png);
+    }
+
+
+.plugin-modern-ie .test-item-title-column {
+    width: 33%;
+    float: left;
+}
+
+.plugin-modern-ie .test-item-detail {
+    overflow: hidden;
+    /*-moz-transition: height 0.25s linear;
+    -o-transition: height 0.25s linear;
+    -webkit-transition: height 0.25s linear;
+    transition: height 0.25s linear;*/
+    height: 0;
+}
+
+.plugin-modern-ie .test-item-description,
+.plugin-modern-ie .test-item-warning {
+    padding: 18px 0;
+    margin: 0;
+    display: block;
+    font-size: 14pt;
+    font-family: 'Segoe UI', Helvetica, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+}
+
+.plugin-modern-ie .test-item-description {
+    color: #404040;
+}
+
+.plugin-modern-ie .test-item-warning {
+    color: #f7910f;
+}
+
+.plugin-modern-ie .warning .test-item-warning {
+    display: block;
+}
+
+.plugin-modern-ie .test-item-show-detail.expand,
+.plugin-modern-ie .test-item-show-detail.contract {
+    display: none;
+}
+
+.plugin-modern-ie .collapsed .expand {
+    display: block;
+}
+
+.plugin-modern-ie .expanded .contract {
+    display: block;
+}
+
+.plugin-modern-ie .test-item-content,
+.plugin-modern-ie .test-item-content p {
+    font-family: 'Segoe UI', Helvetica, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+    font-size: 12pt;
+}
+
+.plugin-modern-ie .test-item-show-detail {
+    background: center right no-repeat;
+    text-align: right;
+    display: block;
+    position: relative;
+    padding: 18px 35px 18px 0;
+}
+
+    .plugin-modern-ie .test-item-show-detail.expand {
+        background-image: url(chrome-extension://__MSG_@@extension_id__/images/expand-icon.png);
+    }
+
+    .plugin-modern-ie .test-item-show-detail.contract {
+        background-image: url(chrome-extension://__MSG_@@extension_id__/images/contract-icon.png);
+    }
+
+.plugin-modern-ie .detail-section {
+    float: left;
+}
+
+.plugin-modern-ie .issue-found {
+    width: 66%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-right: 30px;
+}
+
+.plugin-modern-ie .fix-or-implement {
+    width: 33%;
+}
+
+.plugin-modern-ie .detail-section-header {
+    font-family: 'Segoe UI', Helvetica, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+    font-weight: bold;
+    font-size: 12pt;
+    line-height: 14pt;
+    margin-bottom: 10px;
+}
+
+.plugin-modern-ie .detail-section p {
+    font-family: "Segoe UI Semilight";
+    font-size: 11pt;
+    line-height: 18px;
+}
+
+.plugin-modern-ie .css-location {
+    margin: 10px 0;
+}
+
+.plugin-modern-ie .css-prefixes-list{
+    background-color: #e5e5e5;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+.plugin-modern-ie .selectors-list-header{
+    font-family: 'Segoe UI', Helvetica, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+    font-weight: bold;
+    margin: 0 0 10px;
+    padding: 0;
+    font-size: 14pt;
+}
+
+.plugin-modern-ie code, 
+.plugin-modern-ie kbd, 
+.plugin-modern-ie pre, 
+.plugin-modern-ie samp {
+    font-family: monospace,serif;
+    _font-family: 'courier new',monospace;
+    font-size: 1em;
+}
+
+    .plugin-modern-ie code[class*="language-"], 
+    .plugin-modern-ie pre[class*="language-"] {
+        color: #000;
+        -webkit-text-shadow: 0 1px white;
+        text-shadow: 0 1px white;
+        font-family: Consolas,Monaco,'Andale Mono',monospace;
+        direction: ltr;
+        text-align: left;
+        white-space: pre;
+        word-spacing: normal;
+        -moz-tab-size: 4;
+        -o-tab-size: 4;
+        tab-size: 4;
+        -webkit-hyphens: none;
+        -moz-hyphens: none;
+        -ms-hyphens: none;
+        hyphens: none;
+    }
+
+    .plugin-modern-ie pre[class*="language-"] {
+        padding: 1em;
+        margin: .5em 0;
+        overflow: auto;
+    }
+
+    .plugin-modern-ie :not(pre) > code[class*="language-"], 
+    .plugin-modern-ie pre[class*="language-"] {
+        background: #f5f2f0;
+    }
+
+.plugin-modern-ie .token.property, 
+.plugin-modern-ie .token.tag, 
+.plugin-modern-ie .token.boolean, 
+.plugin-modern-ie .token.number {
+    color: #905;
+}
+
+.plugin-modern-ie .token.punctuation {
+    color: #999;
+}
+
+.plugin-modern-ie .token.selector, 
+.plugin-modern-ie .token.attr-name, 
+.plugin-modern-ie .token.string {
+    color: #690;
+}
+
+.plugin-modern-ie .token.atrule, 
+.plugin-modern-ie .token.attr-value, 
+.plugin-modern-ie .token.keyword {
+    color: #07a;
+}
+
+.plugin-modern-ie .cta{
+    position: relative;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: inline-block;
+    padding: .7em 3em .7em 1em;
+    background: #0079c2;
+    color: #fff;
+}
+
+.plugin-modern-ie .cta.sauce-labs-trigger {
+    padding-left: 44px;
+    color: #454545;
+    background: #ff8c00 url(chrome-extension://__MSG_@@extension_id__/images/image-box.png) 6px center no-repeat;
+    font-size: 11pt;
+}
+
+.plugin-modern-ie .cta .icon-right {
+    position: absolute;
+    background-image: url(chrome-extension://__MSG_@@extension_id__/images/white-right-arrow.png);
+    width: 25px;
+    height: 25px;
+    right: 6px;
+    top: 50%;
+    margin-top: -12px;
+}
+
+.plugin-modern-ie .cta.sauce-labs-trigger .icon-right {
+    background-image: url(chrome-extension://__MSG_@@extension_id__/images/black-right-arrow.png);
+}
+
+.plugin-modern-ie .detail-section.fix-or-implement li{
+    margin-bottom: 15px;
+}
+
+.plugin-modern-ie table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1.5em;
+    background-color: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.plugin-modern-ie .table-bordered {
+    border-collapse: separate;
+}
+
+.plugin-modern-ie .issue-found table {
+    background-color: #fff;
+    table-layout: fixed;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
+}
+
+.plugin-modern-ie table thead {
+    background-color: #0079c2;
+}
+
+    .plugin-modern-ie table thead th {
+        padding: .5em;
+        color: #fff;
+        vertical-align: bottom;
+        text-align: left;
+        font-family: "Segoe UI Semibold","Segoe Semibold","Segoe WP Semibold","Tahoma","Verdana","Arial","sans-serif";
+        border-right: 2px solid #fff;
+    }
+
+.plugin-modern-ie table.tcol-2 td {
+    width: 50%;
+}
+
+.plugin-modern-ie table td {
+    padding: .5em;
+    vertical-align: middle;
+}
+
+.plugin-modern-ie table tbody tr td{
+    background-color: #f5f5f5;
+}
+
+.plugin-modern-ie table tbody tr:nth-child(even) td{
+    background-color: #f9f9f9;
+}

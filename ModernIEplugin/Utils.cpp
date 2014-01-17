@@ -45,45 +45,42 @@ BSTR CUtils::ReadFileToBSTR(LPCWSTR fileName)
 		OPEN_EXISTING,         
 		FILE_ATTRIBUTE_NORMAL,
 		NULL);
-	ATLENSURE(hFile != INVALID_HANDLE_VALUE);
+	ATLASSERT(hFile != INVALID_HANDLE_VALUE);
 
-	ATLENSURE(::GetFileSizeEx(hFile, &file_size));
+	ATLASSERT(::GetFileSizeEx(hFile, &file_size));
 	
 	SIZE_T buffer_size = (SIZE_T)file_size.QuadPart;
 	VOID* read_buffer = ::LocalAlloc(LMEM_ZEROINIT, buffer_size);
-	ATLENSURE(::ReadFile(hFile, read_buffer, buffer_size, &bytes_read, NULL));
-	ATLENSURE(::CloseHandle(hFile));
+	ATLASSERT(::ReadFile(hFile, read_buffer, buffer_size, &bytes_read, NULL));
+	ATLASSERT(::CloseHandle(hFile));
 
 	CComBSTR result = CComBSTR((LPCSTR)read_buffer);
 
 	return result;
 }
 
-void CUtils::InjectScript(IHTMLDocument2* document, IHTMLDOMNode* parentNode, BSTR src)
+void CUtils::InjectScript(IHTMLDocument2* document, IHTMLDOMNode* parentNode, BSTR text)
 {
 	HRESULT hr;
 
 	CComPtr<IHTMLElement> script_element_added;
-	hr = document->createElement(CComBSTR(_T("SCRIPT")), (IHTMLElement**)&script_element_added);
-	ATLENSURE(hr == S_OK);
+	hr = document->createElement(CComBSTR("SCRIPT"), (IHTMLElement**)&script_element_added);
+	ATLASSERT(hr == S_OK);
 
 	CComPtr<IHTMLScriptElement> script_element;
 	hr = script_element_added->QueryInterface(IID_IHTMLScriptElement, (void**)&script_element);
-	ATLENSURE(hr == S_OK);
+	ATLASSERT(hr == S_OK);
 
-	hr = script_element->put_type(CComBSTR(_T("text/javascript")));
-	ATLENSURE(hr == S_OK);
-
-	hr = script_element->put_src(src);
-	ATLENSURE(hr == S_OK);
+	script_element->put_type(CComBSTR("text/javascript"));
+	script_element->put_text(text);
 
 	CComPtr<IHTMLDOMNode> dom_node_script;
 	hr = script_element->QueryInterface(IID_IHTMLDOMNode, (void**)&dom_node_script);
-	ATLENSURE(hr == S_OK);
+	ATLASSERT(hr == S_OK);
 
 	CComPtr<IHTMLDOMNode> pRefNode = NULL;
 	hr = parentNode->appendChild(dom_node_script, &pRefNode);
-	ATLENSURE(hr == S_OK);
+	ATLASSERT(hr == S_OK);
 }
 
 void CUtils::InjectLink(IHTMLDocument2* document, IHTMLDOMNode* parentNode, BSTR rel, BSTR type, BSTR href)
@@ -91,27 +88,49 @@ void CUtils::InjectLink(IHTMLDocument2* document, IHTMLDOMNode* parentNode, BSTR
 	HRESULT hr;
 
 	CComPtr<IHTMLElement> link_element_added;
-	hr = document->createElement(CComBSTR(_T("LINK")), (IHTMLElement**)&link_element_added);
-	ATLENSURE(hr == S_OK);
+	hr = document->createElement(CComBSTR("LINK"), (IHTMLElement**)&link_element_added);
+	ATLASSERT(hr == S_OK);
 
 	CComPtr<IHTMLLinkElement> link_element;
 	hr = link_element_added->QueryInterface(IID_IHTMLLinkElement, (void**)&link_element);
-	ATLENSURE(hr == S_OK);
+	ATLASSERT(hr == S_OK);
 
-	hr = link_element->put_rel(rel);
-	ATLENSURE(hr == S_OK);
-
-	hr = link_element->put_type(type);
-	ATLENSURE(hr == S_OK);
-
-	hr = link_element->put_href(href);
-	ATLENSURE(hr == S_OK);
+	link_element->put_rel(rel);
+	link_element->put_type(type);
+	link_element->put_href(href);
 
 	CComPtr<IHTMLDOMNode> dom_node_link;
 	hr = link_element->QueryInterface(IID_IHTMLDOMNode, (void**)&dom_node_link);
-	ATLENSURE(hr == S_OK);
+	ATLASSERT(hr == S_OK);
 
 	CComPtr<IHTMLDOMNode> pRefNode = NULL;
 	hr = parentNode->appendChild(dom_node_link, &pRefNode);
-	ATLENSURE(hr == S_OK);
+	ATLASSERT(hr == S_OK);
+}
+
+void CUtils::InjectStyle(IHTMLDocument2* document, IHTMLDOMNode* parentNode, BSTR text)
+{
+	HRESULT hr;
+
+	CComPtr<IHTMLElement> style_element_added;
+	hr = document->createElement(CComBSTR("STYLE"), (IHTMLElement**)&style_element_added);
+	ATLASSERT(hr == S_OK);
+
+	CComPtr<IHTMLStyleElement> style_element;
+	hr = style_element_added->QueryInterface(IID_IHTMLStyleElement, (void**)&style_element);
+	ATLASSERT(hr == S_OK);
+
+	style_element->put_type(CComBSTR("text/css"));
+
+	CComPtr<IHTMLStyleSheet> style_sheet;
+	style_element->get_styleSheet((IHTMLStyleSheet**)&style_sheet);
+	style_sheet->put_cssText(text);
+
+	CComPtr<IHTMLDOMNode> dom_node_style;
+	hr = style_element_added->QueryInterface(IID_IHTMLDOMNode, (void**)&dom_node_style);
+	ATLASSERT(hr == S_OK); 
+
+	CComPtr<IHTMLDOMNode> pRefNode = NULL;
+	hr = parentNode->appendChild(dom_node_style, &pRefNode);
+	ATLASSERT(hr == S_OK);
 }

@@ -30,7 +30,7 @@ STDMETHODIMP CModernIEButton::Exec(const GUID *pguidCmdGroup, DWORD nCmdID,
 {
 	CComPtr<IDispatch> spDoc;
 	HRESULT hr = m_spWebBrowser->get_Document(&spDoc);
-	ATLENSURE(hr == S_OK);
+	ATLASSERT(hr == S_OK);
 
 	if (SUCCEEDED(hr))
 	{
@@ -42,32 +42,28 @@ STDMETHODIMP CModernIEButton::Exec(const GUID *pguidCmdGroup, DWORD nCmdID,
 		spHTMLDoc3->get_documentElement(&docElement);
 		spHTMLDoc2->get_parentWindow(&window);
 
-		//CComPtr<IHTMLStyleSheet> style_sheet;
-		//hr = spHTMLDoc2->createStyleSheet(CComBSTR(""), 0, &style_sheet);
-		//ATLENSURE(hr == S_OK);
-
-		//BSTR css = CUtils::ReadFileToBSTR(css_path.GetString());
-		//hr = style_sheet->put_cssText(css);
-		//ATLENSURE(hr == S_OK);
-
-
 		CComPtr<IHTMLElement> body;
 		CComPtr<IHTMLDOMNode> body_node;
 		spHTMLDoc2->get_body(&body);
 		body->QueryInterface(IID_IHTMLDOMNode, (void**)&body_node);
 
-		CAtlString start_script_path = CUtils::GetScriptsPath() + CAtlString("start.js");
-		BSTR start_script = CUtils::ReadFileToBSTR(start_script_path);
+		CAtlString modern_css_path = CUtils::GetCSSsPath() + CAtlString("test.css");
+		BSTR modern_css_text = CUtils::ReadFileToBSTR(modern_css_path.GetString());
+		CUtils::InjectStyle(spHTMLDoc2, body_node, modern_css_text);
 
-		CComVariant result;
-		hr = window->execScript(start_script, CComBSTR(L"JavaScript"), &result);
-		ATLENSURE(hr == S_OK);
+		//CAtlString start_script_path = CUtils::GetScriptsPath() + CAtlString("start.js");
+		//BSTR start_script = CUtils::ReadFileToBSTR(start_script_path);
+
+		//CComVariant result;
+		//hr = window->execScript(start_script, CComBSTR("JavaScript"), &result);
+		//if (FAILED(hr))
+		//{
+		//	ATLTRACE(start_script);
+		//}
 
 		//CAtlString crawler_script_path = CUtils::GetScriptsPath() + CAtlString("crawler.js");
 		//CUtils::InjectScript(spHTMLDoc2, body_node, CComBSTR(crawler_script_path));
 
-		//CAtlString modern_css_path = CUtils::GetCSSsPath() + CAtlString("modern.css");
-		//CUtils::InjectLink(spHTMLDoc2, body_node, _T("stylesheet"), _T("text/css"), CComBSTR(modern_css_path));
 	}
 
 	return S_OK;
