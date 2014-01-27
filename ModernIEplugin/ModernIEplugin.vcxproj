@@ -172,8 +172,10 @@ xcopy /y /d $(ProjectDir)CSS\*.* $(OutDir)CSS\</Command>
     <None Include="ModernIEplugin.def" />
     <None Include="ModernIEplugin.rgs" />
     <None Include="RegisterPlugin.reg" />
+    <None Include="Scripts\crawler-data-ie.js" />
     <None Include="Scripts\crawler.js" />
-    <None Include="Scripts\start.js" />
+    <None Include="Scripts\locale.js" />
+    <None Include="Scripts\main.js" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="ModernIEplugin.idl" />

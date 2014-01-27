@@ -33,7 +33,7 @@ CAtlString CUtils::GetPluginPath()
 	return strAppPath;
 }
 
-BSTR CUtils::ReadFileToBSTR(LPCWSTR fileName)
+CComBSTR CUtils::ReadFileToBSTR(LPCWSTR fileName)
 {
 	LARGE_INTEGER file_size;
 	DWORD bytes_read;
@@ -50,8 +50,9 @@ BSTR CUtils::ReadFileToBSTR(LPCWSTR fileName)
 	ATLASSERT(::GetFileSizeEx(hFile, &file_size));
 	
 	SIZE_T buffer_size = (SIZE_T)file_size.QuadPart;
-	VOID* read_buffer = ::LocalAlloc(LMEM_ZEROINIT, buffer_size);
+	VOID* read_buffer = ::LocalAlloc(LMEM_ZEROINIT, buffer_size + 1);
 	ATLASSERT(::ReadFile(hFile, read_buffer, buffer_size, &bytes_read, NULL));
+	ATLASSERT(buffer_size == bytes_read);
 	ATLASSERT(::CloseHandle(hFile));
 
 	CComBSTR result = CComBSTR((LPCSTR)read_buffer);
@@ -80,31 +81,6 @@ void CUtils::InjectScript(IHTMLDocument2* document, IHTMLDOMNode* parentNode, BS
 
 	CComPtr<IHTMLDOMNode> pRefNode = NULL;
 	hr = parentNode->appendChild(dom_node_script, &pRefNode);
-	ATLASSERT(hr == S_OK);
-}
-
-void CUtils::InjectLink(IHTMLDocument2* document, IHTMLDOMNode* parentNode, BSTR rel, BSTR type, BSTR href)
-{
-	HRESULT hr;
-
-	CComPtr<IHTMLElement> link_element_added;
-	hr = document->createElement(CComBSTR("LINK"), (IHTMLElement**)&link_element_added);
-	ATLASSERT(hr == S_OK);
-
-	CComPtr<IHTMLLinkElement> link_element;
-	hr = link_element_added->QueryInterface(IID_IHTMLLinkElement, (void**)&link_element);
-	ATLASSERT(hr == S_OK);
-
-	link_element->put_rel(rel);
-	link_element->put_type(type);
-	link_element->put_href(href);
-
-	CComPtr<IHTMLDOMNode> dom_node_link;
-	hr = link_element->QueryInterface(IID_IHTMLDOMNode, (void**)&dom_node_link);
-	ATLASSERT(hr == S_OK);
-
-	CComPtr<IHTMLDOMNode> pRefNode = NULL;
-	hr = parentNode->appendChild(dom_node_link, &pRefNode);
 	ATLASSERT(hr == S_OK);
 }
 

@@ -104,7 +104,13 @@
     <None Include="CSS\test.css">
       <Filter>CSS</Filter>
     </None>
-    <None Include="Scripts\start.js">
+    <None Include="Scripts\main.js">
+      <Filter>Scripts</Filter>
+    </None>
+    <None Include="Scripts\crawler-data-ie.js">
+      <Filter>Scripts</Filter>
+    </None>
+    <None Include="Scripts\locale.js">
       <Filter>Scripts</Filter>
     </None>
   </ItemGroup>

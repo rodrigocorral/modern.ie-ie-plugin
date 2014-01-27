@@ -12,9 +12,8 @@ public:
 	static HINSTANCE hInstance;
 	static CString GetScriptsPath();
 	static CString GetCSSsPath();
-	static BSTR ReadFileToBSTR(LPCWSTR fileName);
-	static void InjectScript(IHTMLDocument2* document, IHTMLDOMNode* parentNode, BSTR src);
-	static void InjectLink(IHTMLDocument2* document, IHTMLDOMNode* parentNode, BSTR rel, BSTR type, BSTR href);
+	static CComBSTR ReadFileToBSTR(LPCWSTR fileName);
+	static void InjectScript(IHTMLDocument2* document, IHTMLDOMNode* parentNode, BSTR text);
 	static void InjectStyle(IHTMLDocument2* document, IHTMLDOMNode* parentNode, BSTR text);
 
 private:

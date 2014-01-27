@@ -30,7 +30,6 @@ STDMETHODIMP CModernIEButton::Exec(const GUID *pguidCmdGroup, DWORD nCmdID,
 {
 	CComPtr<IDispatch> spDoc;
 	HRESULT hr = m_spWebBrowser->get_Document(&spDoc);
-	ATLASSERT(hr == S_OK);
 
 	if (SUCCEEDED(hr))
 	{
@@ -47,22 +46,21 @@ STDMETHODIMP CModernIEButton::Exec(const GUID *pguidCmdGroup, DWORD nCmdID,
 		spHTMLDoc2->get_body(&body);
 		body->QueryInterface(IID_IHTMLDOMNode, (void**)&body_node);
 
-		CAtlString modern_css_path = CUtils::GetCSSsPath() + CAtlString("test.css");
-		BSTR modern_css_text = CUtils::ReadFileToBSTR(modern_css_path.GetString());
+		CAtlString modern_css_path = CUtils::GetCSSsPath() + CAtlString("modern.css");
+		CComBSTR modern_css_text = CUtils::ReadFileToBSTR(modern_css_path.GetString());
 		CUtils::InjectStyle(spHTMLDoc2, body_node, modern_css_text);
 
-		//CAtlString start_script_path = CUtils::GetScriptsPath() + CAtlString("start.js");
-		//BSTR start_script = CUtils::ReadFileToBSTR(start_script_path);
+		CAtlString crawler_data_script_path = CUtils::GetScriptsPath() + CAtlString("crawler-data-ie.js");
+		CComBSTR crawler_data_script = CUtils::ReadFileToBSTR(crawler_data_script_path);
+		CUtils::InjectScript(spHTMLDoc2, body_node, crawler_data_script);
 
-		//CComVariant result;
-		//hr = window->execScript(start_script, CComBSTR("JavaScript"), &result);
-		//if (FAILED(hr))
-		//{
-		//	ATLTRACE(start_script);
-		//}
+		CAtlString crawler_script_path = CUtils::GetScriptsPath() + CAtlString("crawler.js");
+		CComBSTR crawler_script = CUtils::ReadFileToBSTR(crawler_script_path);
+		CUtils::InjectScript(spHTMLDoc2, body_node, crawler_script);
 
-		//CAtlString crawler_script_path = CUtils::GetScriptsPath() + CAtlString("crawler.js");
-		//CUtils::InjectScript(spHTMLDoc2, body_node, CComBSTR(crawler_script_path));
+		CAtlString start_script_path = CUtils::GetScriptsPath() + CAtlString("main.js");
+		CComBSTR start_script = CUtils::ReadFileToBSTR(start_script_path);
+		CUtils::InjectScript(spHTMLDoc2, body_node, start_script);
 
 	}
 
