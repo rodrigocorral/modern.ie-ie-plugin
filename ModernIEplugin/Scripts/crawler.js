@@ -560,6 +560,8 @@ var modernIE = modernIE || {};
     }
 
     function getSections(locale, analisysData) {
+        debugger;
+
         var i = 1,
             sections = [],
             section;
@@ -580,8 +582,9 @@ var modernIE = modernIE || {};
     }
 
     function generateHTML(analisysData) {
-
+        
         getLocale(function (locale) {
+            
             var sections = getSections(locale, analisysData),
                 pluginModernIe = document.querySelector(".plugin-modern-ie"),
                 columnCenter,
@@ -610,16 +613,25 @@ var modernIE = modernIE || {};
 
     function getLocale(callback) {
         var locale;
+
         if (typeof chrome === "undefined") {
-            locale = self.options.locale.moderncontentv4;
-            setTimeout(callback.bind(null, locale), 0);
+            if (typeof self !== "undefined" && self.options) {
+                //Firefox
+                locale = self.options.locale.moderncontentv4;
+            }
+            else {
+                //IE
+                locale = localeIE;
+            }
         } else {
+            //Chrome
             var jsonUrl = chrome.extension.getURL("data/locales/locale.json");
             modernIE.getFile(jsonUrl, function (response) {
                 locale = JSON.parse((response.content)).moderncontentv4;
-                setTimeout(callback.bind(null, locale), 0);
             });
         }
+
+        setTimeout(callback.bind(null, locale), 0);
     }
 
     function sendData(data, callback) {

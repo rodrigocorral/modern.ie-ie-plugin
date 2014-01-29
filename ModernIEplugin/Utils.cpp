@@ -60,6 +60,18 @@ CComBSTR CUtils::ReadFileToBSTR(LPCWSTR fileName)
 	return result;
 }
 
+void CUtils::InjectScriptFromLocalFile(IHTMLDocument2* document, IHTMLDOMNode* parentNode, CAtlString scriptFilePath)
+{
+	CComBSTR script_text = CUtils::ReadFileToBSTR(scriptFilePath);
+	CUtils::InjectScript(document, parentNode, script_text);
+}
+
+void CUtils::InjectStyleFromLocalFile(IHTMLDocument2* document, IHTMLDOMNode* parentNode, CAtlString cssFilePath)
+{
+	CComBSTR style_text = CUtils::ReadFileToBSTR(cssFilePath);
+	CUtils::InjectStyle(document, parentNode, style_text);
+}
+
 void CUtils::InjectScript(IHTMLDocument2* document, IHTMLDOMNode* parentNode, BSTR text)
 {
 	HRESULT hr;

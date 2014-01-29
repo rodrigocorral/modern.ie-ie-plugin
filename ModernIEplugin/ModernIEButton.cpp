@@ -47,21 +47,19 @@ STDMETHODIMP CModernIEButton::Exec(const GUID *pguidCmdGroup, DWORD nCmdID,
 		body->QueryInterface(IID_IHTMLDOMNode, (void**)&body_node);
 
 		CAtlString modern_css_path = CUtils::GetCSSsPath() + CAtlString("modern.css");
-		CComBSTR modern_css_text = CUtils::ReadFileToBSTR(modern_css_path.GetString());
-		CUtils::InjectStyle(spHTMLDoc2, body_node, modern_css_text);
+		CUtils::InjectStyleFromLocalFile(spHTMLDoc2, body_node, modern_css_path);
+
+		CAtlString locale_script_path = CUtils::GetScriptsPath() + CAtlString("locale.js");
+		CUtils::InjectScriptFromLocalFile(spHTMLDoc2, body_node, locale_script_path);
 
 		CAtlString crawler_data_script_path = CUtils::GetScriptsPath() + CAtlString("crawler-data-ie.js");
-		CComBSTR crawler_data_script = CUtils::ReadFileToBSTR(crawler_data_script_path);
-		CUtils::InjectScript(spHTMLDoc2, body_node, crawler_data_script);
+		CUtils::InjectScriptFromLocalFile(spHTMLDoc2, body_node, crawler_data_script_path);
 
 		CAtlString crawler_script_path = CUtils::GetScriptsPath() + CAtlString("crawler.js");
-		CComBSTR crawler_script = CUtils::ReadFileToBSTR(crawler_script_path);
-		CUtils::InjectScript(spHTMLDoc2, body_node, crawler_script);
+		CUtils::InjectScriptFromLocalFile(spHTMLDoc2, body_node, crawler_script_path);
 
 		CAtlString start_script_path = CUtils::GetScriptsPath() + CAtlString("main.js");
-		CComBSTR start_script = CUtils::ReadFileToBSTR(start_script_path);
-		CUtils::InjectScript(spHTMLDoc2, body_node, start_script);
-
+		CUtils::InjectScriptFromLocalFile(spHTMLDoc2, body_node, start_script_path);
 	}
 
 	return S_OK;

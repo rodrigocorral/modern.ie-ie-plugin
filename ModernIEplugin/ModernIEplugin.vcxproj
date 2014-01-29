@@ -167,7 +167,6 @@ xcopy /y /d $(ProjectDir)CSS\*.* $(OutDir)CSS\</Command>
   </ItemGroup>
   <ItemGroup>
     <None Include="CSS\modern.css" />
-    <None Include="CSS\test.css" />
     <None Include="ModernIEButton.rgs" />
     <None Include="ModernIEplugin.def" />
     <None Include="ModernIEplugin.rgs" />

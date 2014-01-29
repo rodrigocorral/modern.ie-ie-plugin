@@ -30,7 +30,9 @@ var modernIE = modernIE || {};
     }
 
     function getServerUrl(callback) {
-        var server_url = "http://localhost:1337/package";
+        //var server_url = "http://moderniescannertests.azurewebsites.net/package";
+        var server_url = "http://192.168.1.34:1337/package";
+        callback(server_url);
     }
 
     function analyze(serializedData, successCallback, errorCallback) {
@@ -47,7 +49,6 @@ var modernIE = modernIE || {};
                 if (this.readyState === 4) {
                     if (this.status === 200) {
                         analysisData = JSON.parse(this.responseText);
-
                         successCallback(analysisData);
                     } else {
                         errorCallback();
@@ -69,16 +70,6 @@ var modernIE = modernIE || {};
         };
     }
 
-    function isIE() {
-        return 
-            navigator.appName.indexOf("Internet Explorer") != -1  
-            && (
-                navigator.appVersion.indexOf("MSIE 9") != -1  //IE9
-                || navigator.appVersion.indexOf("MSIE 1") != -1 //IE1x
-            ); 
-    }
-
     modernIE.getFile = getFile;
     modernIE.analyze = analyze;
-    modernIE.isIE = isIE;
 }());

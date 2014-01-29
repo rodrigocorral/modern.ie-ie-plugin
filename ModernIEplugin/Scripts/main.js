@@ -1,4 +1,4 @@
 var main = function main() {
-    alert("Ejecutando start script...");
+    alert("Executing main script...");
     modernIE.scan();
 }();

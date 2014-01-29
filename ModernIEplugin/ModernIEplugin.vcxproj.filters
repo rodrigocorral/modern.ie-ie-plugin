@@ -101,9 +101,6 @@
     <None Include="CSS\modern.css">
       <Filter>CSS</Filter>
     </None>
-    <None Include="CSS\test.css">
-      <Filter>CSS</Filter>
-    </None>
     <None Include="Scripts\main.js">
       <Filter>Scripts</Filter>
     </None>
