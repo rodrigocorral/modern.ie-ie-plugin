@@ -57,6 +57,8 @@ CComBSTR CUtils::ReadFileToBSTR(LPCWSTR fileName)
 
 	CComBSTR result = CComBSTR((LPCSTR)read_buffer);
 
+	::LocalFree(read_buffer);
+
 	return result;
 }
 

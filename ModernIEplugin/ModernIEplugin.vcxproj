@@ -187,4 +187,9 @@ xcopy /y /d $(ProjectDir)CSS\*.* $(OutDir)CSS\</Command>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="ModernIEplugin.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

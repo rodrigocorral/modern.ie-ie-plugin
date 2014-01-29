@@ -30,11 +30,8 @@ STDMETHODIMP CModernIEButton::Exec(const GUID *pguidCmdGroup, DWORD nCmdID,
 	DWORD nCmdExecOpt, VARIANTARG *pvaIn, VARIANTARG *pvaOut)
 {
 	CConfigDialog d;
-	
 	d.DoModal();
 	
-	
-
 	CComPtr<IDispatch> spDoc;
 	HRESULT hr = m_spWebBrowser->get_Document(&spDoc);
 
