@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include "ModernIEButton.h"
+#include "ConfigDialog.h"
 #include "Utils.h"
 
 // IObjectWithSite
@@ -28,6 +29,12 @@ STDMETHODIMP CModernIEButton::SetSite(_In_opt_ IUnknown *pUnkSite)
 STDMETHODIMP CModernIEButton::Exec(const GUID *pguidCmdGroup, DWORD nCmdID,
 	DWORD nCmdExecOpt, VARIANTARG *pvaIn, VARIANTARG *pvaOut)
 {
+	CConfigDialog d;
+	
+	d.DoModal();
+	
+	
+
 	CComPtr<IDispatch> spDoc;
 	HRESULT hr = m_spWebBrowser->get_Document(&spDoc);
 

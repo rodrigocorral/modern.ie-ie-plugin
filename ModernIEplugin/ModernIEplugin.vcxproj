@@ -120,6 +120,7 @@ xcopy /y /d $(ProjectDir)CSS\*.* $(OutDir)CSS\</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ConfigDialog.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -153,6 +154,7 @@ xcopy /y /d $(ProjectDir)CSS\*.* $(OutDir)CSS\</Command>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ConfigDialog.h" />
     <ClInclude Include="dllmain.h" />
     <ClInclude Include="ModernIEButton.h" />
     <ClInclude Include="ModernIEplugin_i.h" />

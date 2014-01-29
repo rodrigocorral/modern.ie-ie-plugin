@@ -560,8 +560,6 @@ var modernIE = modernIE || {};
     }
 
     function getSections(locale, analisysData) {
-        debugger;
-
         var i = 1,
             sections = [],
             section;
