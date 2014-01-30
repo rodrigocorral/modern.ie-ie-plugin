@@ -17,6 +17,15 @@ import "ocidl.idl";
 interface IModernIEButton : IDispatch{
 };
 [
+	object,
+	uuid(7F34937D-2446-45E3-921F-5D9004D96584),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IModernIEConfigButton : IDispatch{
+};
+[
 	uuid(EA47C639-CA90-4DCF-9860-74B5CB36C469),
 	version(1.0),
 ]
@@ -29,6 +38,13 @@ library ModernIEpluginLib
 	coclass ModernIEButton
 	{
 		[default] interface IModernIEButton;
+	};
+	[
+		uuid(C2388301-15A8-47AA-AF66-A80820458081)		
+	]
+	coclass ModernIEConfigButton
+	{
+		[default] interface IModernIEConfigButton;
 	};
 };
 

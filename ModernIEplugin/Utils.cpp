@@ -36,7 +36,7 @@ CAtlString CUtils::GetPluginPath()
 CComBSTR CUtils::ReadFileToBSTR(LPCWSTR fileName)
 {
 	LARGE_INTEGER file_size;
-	DWORD bytes_read;
+	DWORD bytes_read = 0;
 
 	HANDLE hFile = ::CreateFile(fileName,
 		GENERIC_READ,          
@@ -47,7 +47,7 @@ CComBSTR CUtils::ReadFileToBSTR(LPCWSTR fileName)
 		NULL);
 	ATLASSERT(hFile != INVALID_HANDLE_VALUE);
 
-	ATLASSERT(::GetFileSizeEx(hFile, &file_size));
+	::GetFileSizeEx(hFile, &file_size);
 	
 	SIZE_T buffer_size = (SIZE_T)file_size.QuadPart;
 	VOID* read_buffer = ::LocalAlloc(LMEM_ZEROINIT, buffer_size + 1);

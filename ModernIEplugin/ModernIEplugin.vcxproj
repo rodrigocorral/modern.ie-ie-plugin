@@ -78,7 +78,8 @@
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y /d $(ProjectDir)Scripts\*.* $(OutDir)Scripts\
-xcopy /y /d $(ProjectDir)CSS\*.* $(OutDir)CSS\</Command>
+xcopy /y /d $(ProjectDir)CSS\*.* $(OutDir)CSS\
+xcopy /y /d $(ProjectDir)Images\*.* $(OutDir)Images\</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -116,7 +117,8 @@ xcopy /y /d $(ProjectDir)CSS\*.* $(OutDir)CSS\</Command>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y /d $(ProjectDir)Scripts\*.* $(OutDir)Scripts\
-xcopy /y /d $(ProjectDir)CSS\*.* $(OutDir)CSS\</Command>
+xcopy /y /d $(ProjectDir)CSS\*.* $(OutDir)CSS\
+xcopy /y /d $(ProjectDir)Images\*.* $(OutDir)Images\</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -130,6 +132,7 @@ xcopy /y /d $(ProjectDir)CSS\*.* $(OutDir)CSS\</Command>
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="ModernIEButton.cpp" />
+    <ClCompile Include="ModernIEConfigButton.cpp" />
     <ClCompile Include="ModernIEplugin.cpp" />
     <ClCompile Include="ModernIEplugin_i.c">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
@@ -158,6 +161,7 @@ xcopy /y /d $(ProjectDir)CSS\*.* $(OutDir)CSS\</Command>
     <ClInclude Include="ConfigDialog.h" />
     <ClInclude Include="dllmain.h" />
     <ClInclude Include="ModernIEButton.h" />
+    <ClInclude Include="ModernIEConfigButton.h" />
     <ClInclude Include="ModernIEplugin_i.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Config.h" />
@@ -172,6 +176,7 @@ xcopy /y /d $(ProjectDir)CSS\*.* $(OutDir)CSS\</Command>
   <ItemGroup>
     <None Include="CSS\modern.css" />
     <None Include="ModernIEButton.rgs" />
+    <None Include="ModernIEConfigButton.rgs" />
     <None Include="ModernIEplugin.def" />
     <None Include="ModernIEplugin.rgs" />
     <None Include="RegisterPlugin.reg" />
@@ -184,7 +189,12 @@ xcopy /y /d $(ProjectDir)CSS\*.* $(OutDir)CSS\</Command>
     <Midl Include="ModernIEplugin.idl" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Images\ButtonIcon.ico" />
+    <Image Include="Images\ButtonIcon.ico">
+      <DeploymentContent>false</DeploymentContent>
+    </Image>
+    <Image Include="Images\ConfigButtonIcon.ico">
+      <DeploymentContent>false</DeploymentContent>
+    </Image>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

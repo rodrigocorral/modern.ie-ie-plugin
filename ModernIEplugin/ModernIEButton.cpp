@@ -12,12 +12,10 @@ STDMETHODIMP CModernIEButton::SetSite(_In_opt_ IUnknown *pUnkSite)
 	{
 		CComQIPtr<IServiceProvider> sp = pUnkSite;
 		HRESULT hr = sp->QueryService(IID_IWebBrowserApp, IID_IWebBrowser2, (void**)&m_spWebBrowser);
-		hr = sp->QueryInterface(IID_IOleCommandTarget, (void**)&m_spTarget);
 	}
 	else
 	{
 		m_spWebBrowser.Release();
-		m_spTarget.Release();
 	}
 
 	return IObjectWithSiteImpl<CModernIEButton>::SetSite(pUnkSite);
@@ -29,9 +27,6 @@ STDMETHODIMP CModernIEButton::SetSite(_In_opt_ IUnknown *pUnkSite)
 STDMETHODIMP CModernIEButton::Exec(const GUID *pguidCmdGroup, DWORD nCmdID,
 	DWORD nCmdExecOpt, VARIANTARG *pvaIn, VARIANTARG *pvaOut)
 {
-	CConfigDialog d;
-	d.DoModal();
-
 	CConfig config;
 	
 	CComPtr<IDispatch> spDoc;
@@ -57,8 +52,8 @@ STDMETHODIMP CModernIEButton::Exec(const GUID *pguidCmdGroup, DWORD nCmdID,
 
 		CAtlString configScript;
 		configScript.Format(
-			_T( "var modernIE = modernIE || {}; "
-				"modernIE.config = { serverUrl: '%s'};"),
+			_T("var modernIE = modernIE || {}; ")
+			_T("modernIE.config = { serverUrl: '%s'};"),
 			config.GetServerAddress());
 
 		CUtils::InjectScript(spHTMLDoc2, body_node, CComBSTR(configScript));

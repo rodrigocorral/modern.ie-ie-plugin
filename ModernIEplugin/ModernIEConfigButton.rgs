@@ -1,0 +1,16 @@
+HKCR
+{
+	NoRemove CLSID
+	{
+		ForceRemove {C2388301-15A8-47AA-AF66-A80820458081} = s 'ModernIEConfigButton Class'
+		{
+			ForceRemove Programmable
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			TypeLib = s '{EA47C639-CA90-4DCF-9860-74B5CB36C469}'
+			Version = s '1.0'
+		}
+	}
+}
