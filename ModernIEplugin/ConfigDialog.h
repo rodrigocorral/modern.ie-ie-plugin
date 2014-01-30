@@ -3,7 +3,7 @@
 #pragma once
 
 #include "resource.h"       // main symbols
-
+#include "Config.h"
 #include <atlhost.h>
 
 using namespace ATL;
@@ -43,13 +43,13 @@ END_MSG_MAP()
 		CAxDialogImpl<CConfigDialog>::OnInitDialog(uMsg, wParam, lParam, bHandled);
 		bHandled = TRUE;
 		CenterWindow();
-		LoadSettings();
+		LoadConfig();
 		return 1;  // Let the system set the focus
 	}
 
 	LRESULT OnClickedOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled)
 	{
-		SaveSettings();
+		SaveConfig();
 		EndDialog(wID);
 		return 0;
 	}
@@ -63,37 +63,19 @@ END_MSG_MAP()
 private:
 
 	CRegKey m_modernIE_reg_key;
+	CConfig m_Config;
 
-	void OpenOrCreateModernIEKey()
+	void SaveConfig()
 	{
-		LSTATUS key_operation_status = m_modernIE_reg_key.Create(HKEY_CURRENT_USER, _T("Software\\Microsoft\\ModernIE"));
-		ATLASSERT(key_operation_status == ERROR_SUCCESS);
-	}
-
-	void SaveSettings()
-	{
-		OpenOrCreateModernIEKey();
-		
 		BSTR bstrServerAddress = NULL;
 		this->GetDlgItemText(IDC_SERVER_ADDRESS_EDIT, bstrServerAddress);
 		
-		LSTATUS key_operation_status = m_modernIE_reg_key.SetStringValue(_T("ServerAddress"), W2T(bstrServerAddress));
-		ATLASSERT(key_operation_status == ERROR_SUCCESS);
-		
+		m_Config.SetSeverAddress(CAtlString(bstrServerAddress));
 	}
 
-	void LoadSettings()
+	void LoadConfig()
 	{
-		OpenOrCreateModernIEKey();
-
-		TCHAR ServerAddressKeyValue[2048];
-		ULONG pnChars = sizeof(ServerAddressKeyValue) / sizeof(TCHAR);
-		ZeroMemory(ServerAddressKeyValue, pnChars);
-		
-		LSTATUS key_operation_status = m_modernIE_reg_key.QueryStringValue(_T("ServerAddress"), ServerAddressKeyValue, &pnChars);
-		ATLASSERT(key_operation_status == ERROR_SUCCESS);
-
-		this->SetDlgItemText(IDC_SERVER_ADDRESS_EDIT, ServerAddressKeyValue);
+		this->SetDlgItemText(IDC_SERVER_ADDRESS_EDIT, m_Config.GetServerAddress());
 	}
 };
 
