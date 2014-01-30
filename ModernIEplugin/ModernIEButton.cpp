@@ -31,6 +31,8 @@ STDMETHODIMP CModernIEButton::Exec(const GUID *pguidCmdGroup, DWORD nCmdID,
 {
 	CConfigDialog d;
 	d.DoModal();
+
+	CConfig config;
 	
 	CComPtr<IDispatch> spDoc;
 	HRESULT hr = m_spWebBrowser->get_Document(&spDoc);
@@ -52,6 +54,14 @@ STDMETHODIMP CModernIEButton::Exec(const GUID *pguidCmdGroup, DWORD nCmdID,
 
 		CAtlString modern_css_path = CUtils::GetCSSsPath() + CAtlString("modern.css");
 		CUtils::InjectStyleFromLocalFile(spHTMLDoc2, body_node, modern_css_path);
+
+		CAtlString configScript;
+		configScript.Format(
+			_T( "var modernIE = modernIE || {}; "
+				"modernIE.config = { serverUrl: '%s'};"),
+			config.GetServerAddress());
+
+		CUtils::InjectScript(spHTMLDoc2, body_node, CComBSTR(configScript));
 
 		CAtlString locale_script_path = CUtils::GetScriptsPath() + CAtlString("locale.js");
 		CUtils::InjectScriptFromLocalFile(spHTMLDoc2, body_node, locale_script_path);

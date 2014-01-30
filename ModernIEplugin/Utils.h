@@ -13,11 +13,11 @@ public:
 	static CString GetScriptsPath();
 	static CString GetCSSsPath();
 	static CComBSTR ReadFileToBSTR(LPCWSTR fileName);
+	static void InjectScript(IHTMLDocument2* document, IHTMLDOMNode* parentNode, BSTR text);
 	static void InjectScriptFromLocalFile(IHTMLDocument2* document, IHTMLDOMNode* parentNode, CAtlString filePath);
 	static void InjectStyleFromLocalFile(IHTMLDocument2* document, IHTMLDOMNode* parentNode, CAtlString cssFilePath);
 
 private:	
-	static void InjectScript(IHTMLDocument2* document, IHTMLDOMNode* parentNode, BSTR text);
 	static void InjectStyle(IHTMLDocument2* document, IHTMLDOMNode* parentNode, BSTR text);
 	static CString GetPluginPath();
 };

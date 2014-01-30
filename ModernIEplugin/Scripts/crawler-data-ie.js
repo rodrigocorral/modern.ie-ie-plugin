@@ -30,8 +30,7 @@ var modernIE = modernIE || {};
     }
 
     function getServerUrl(callback) {
-        //var server_url = "http://moderniescannertests.azurewebsites.net/package";
-        var server_url = "http://192.168.1.34:1337/package";
+        var server_url = modernIE.config.serverUrl;
         callback(server_url);
     }
 
