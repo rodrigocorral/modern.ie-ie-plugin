@@ -52,6 +52,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -89,6 +90,7 @@ xcopy /y /d $(ProjectDir)Images\*.* $(OutDir)Images\</Command>
       <Optimization>MaxSpeed</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -189,9 +191,7 @@ xcopy /y /d $(ProjectDir)Images\*.* $(OutDir)Images\</Command>
     <Midl Include="ModernIEplugin.idl" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Images\ButtonIcon.ico">
-      <DeploymentContent>false</DeploymentContent>
-    </Image>
+    <Image Include="Images\ButtonIcon.ico" />
     <Image Include="Images\ConfigButtonIcon.ico">
       <DeploymentContent>false</DeploymentContent>
     </Image>

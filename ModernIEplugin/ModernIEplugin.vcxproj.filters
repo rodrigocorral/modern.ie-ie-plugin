@@ -138,10 +138,10 @@
     </Midl>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Images\ButtonIcon.ico">
-      <Filter>Images</Filter>
-    </Image>
     <Image Include="Images\ConfigButtonIcon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\ButtonIcon.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

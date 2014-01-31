@@ -37,6 +37,7 @@ CComBSTR CUtils::ReadFileToBSTR(LPCWSTR fileName)
 {
 	LARGE_INTEGER file_size;
 	DWORD bytes_read = 0;
+	BOOL status;
 
 	HANDLE hFile = ::CreateFile(fileName,
 		GENERIC_READ,          
@@ -47,13 +48,17 @@ CComBSTR CUtils::ReadFileToBSTR(LPCWSTR fileName)
 		NULL);
 	ATLASSERT(hFile != INVALID_HANDLE_VALUE);
 
-	::GetFileSizeEx(hFile, &file_size);
-	
+	status = ::GetFileSizeEx(hFile, &file_size);
+	ATLASSERT(status);
+
 	SIZE_T buffer_size = (SIZE_T)file_size.QuadPart;
 	VOID* read_buffer = ::LocalAlloc(LMEM_ZEROINIT, buffer_size + 1);
-	ATLASSERT(::ReadFile(hFile, read_buffer, buffer_size, &bytes_read, NULL));
+	status = ::ReadFile(hFile, read_buffer, buffer_size, &bytes_read, NULL);
+	ATLASSERT(status);
+
 	ATLASSERT(buffer_size == bytes_read);
-	ATLASSERT(::CloseHandle(hFile));
+	status = ::CloseHandle(hFile);
+	ATLASSERT(status);
 
 	CComBSTR result = CComBSTR((LPCSTR)read_buffer);
 
